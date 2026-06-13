@@ -1,8 +1,16 @@
 # PDF Semantic Materials Skill
 
-A Codex skill for turning PDFs into agent-readable semantic material packs.
+A general-purpose agent skill for turning PDFs into agent-readable semantic material packs.
 
 This is useful when a PDF should become structured context for downstream agents: every page gets its own folder, page image, page summary, and visual-asset description.
+
+## Typical Use Cases
+
+- Turning slide decks, proposals, reports, and brochures into page-by-page knowledge packs.
+- Preparing PDF content for AI agents that need to understand page meaning, visual assets, and asset roles.
+- Converting mixed text-and-image PDFs into structured Markdown plus rendered page images.
+- Avoiding noisy raw PDF image extraction when a document contains duplicated masks, slices, icons, or background fragments.
+- Building reusable source materials for downstream writing, design, product analysis, or implementation tasks.
 
 ## What It Creates
 
@@ -24,21 +32,20 @@ The skill is designed for semantic PDF parsing, not raw embedded-image dumping. 
 
 ## Install
 
-Copy or clone this repository into your Codex skills directory:
+Copy or clone this repository into your agent skills directory:
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/Nomia/pdf-semantic-materials-skill.git ~/.codex/skills/pdf-semantic-materials
+git clone https://github.com/Nomia/pdf-semantic-materials-skill.git /path/to/skills/pdf-semantic-materials
 ```
 
-Restart Codex after installation if the skill list does not refresh automatically.
+Restart or reload your agent runtime if the skill list does not refresh automatically.
 
 ## Usage
 
-Ask Codex something like:
+Ask your agent something like:
 
 ```text
-把这个 PDF 转成语义材料包，每页一个文件夹，每页要有页面图、page.md 和图片说明 md。
+Convert this PDF into a semantic material pack. Create one folder per page, include a rendered page image, write page.md, and write a Markdown description for each image.
 ```
 
 Or run the scaffold script directly:
@@ -47,7 +54,7 @@ Or run the scaffold script directly:
 python3 scripts/build_pdf_materials.py /path/to/file.pdf /path/to/output --overwrite
 ```
 
-The script creates the deterministic structure and draft Markdown. Codex should then inspect the rendered page images and rewrite the Markdown files with real semantic descriptions.
+The script creates the deterministic structure and draft Markdown. An agent should then inspect the rendered page images and rewrite the Markdown files with real semantic descriptions.
 
 ## Requirements
 
