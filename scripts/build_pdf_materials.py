@@ -93,13 +93,13 @@ def scaffold(pdf_path: Path, target_dir: Path, dpi: int, overwrite: bool, keep_w
         raise SystemExit(f"Expected {total_pages} rendered pages, found {len(rendered)}")
 
     index_lines = [
-        f"# {pdf_path.stem} PDF 语义材料包",
+        f"# {pdf_path.stem} PDF Semantic Materials Pack",
         "",
-        f"来源 PDF：`{pdf_path}`",
+        f"Source PDF: `{pdf_path}`",
         "",
-        "说明：每个页面文件夹包含该页完整页面图、页面语义说明和素材图说明。",
+        "Each page folder contains a rendered page image, a page-level semantic note, and an image description.",
         "",
-        "## 页面索引",
+        "## Page Index",
         "",
     ]
 
@@ -113,44 +113,44 @@ def scaffold(pdf_path: Path, target_dir: Path, dpi: int, overwrite: bool, keep_w
             shutil.copy2(rendered_page, image_path)
 
         text_layer = extract_page_text(pdftotext, pdf_path, idx)
-        visible_text = text_layer if text_layer else "待根据页面图识别"
+        visible_text = text_layer if text_layer else "To be identified from the rendered page image."
 
-        page_md = f"""# 第 {idx:0{width}d} 页：待命名
+        page_md = f"""# Page {idx:0{width}d}: Untitled
 
-## 页面主题
-待根据页面图总结。
+## Page Theme
+To be summarized from the rendered page image.
 
-## 主要内容
-待根据页面图和文本层补充。
+## Main Content
+To be completed from the rendered page image and any extracted text layer.
 
-## 页面素材
-- [image-01.png](./image-01.png)：完整页面视觉素材。待描述页面中的截图、照片、图表、文字和布局。
+## Page Assets
+- [image-01.png](./image-01.png): Full-page visual asset. Describe screenshots, photos, charts, visible text, and layout.
 
-## 素材作用
-待说明该素材如何支撑本页主题。
+## Asset Role
+Explain how this asset supports the page theme.
 
-## 关联素材说明
-- [image-01.md](./image-01.md)：对完整页面图的详细描述。
+## Related Asset Notes
+- [image-01.md](./image-01.md): Detailed description of the full-page image.
 """
 
-        image_md = f"""# image-01.png：第 {idx:0{width}d} 页完整页面图
+        image_md = f"""# image-01.png: Page {idx:0{width}d} Full-Page Image
 
-## 图片讲述的内容
-待根据页面图总结。
+## What The Image Communicates
+To be summarized from the rendered page image.
 
-## 详细视觉描述
-待描述页面中的物体、截图、照片、图标、图表、版式和视觉重点。
+## Detailed Visual Description
+Describe objects, screenshots, photos, icons, charts, layout, and visual emphasis.
 
-## 识别到的关键文字
+## Key Visible Text
 {visible_text}
 
-## 在本页中的作用
-待说明该图片在本页中的表达作用。
+## Role On This Page
+Explain the image's role in the page's message.
 """
 
         write_text(page_dir / "page.md", page_md, overwrite)
         write_text(page_dir / "image-01.md", image_md, overwrite)
-        index_lines.append(f"- [第 {idx:0{width}d} 页](./{page_id}/page.md) - 待总结")
+        index_lines.append(f"- [Page {idx:0{width}d}](./{page_id}/page.md) - To be summarized")
 
     write_text(target_dir / "index.md", "\n".join(index_lines) + "\n", overwrite)
 
