@@ -42,7 +42,7 @@ Each `image-01.md` must explain:
 - key visible text
 - role on the page
 
-Do not add generic sections such as `使用建议`, `Usage Suggestions`, or agent instructions inside generated page/material Markdown unless the user explicitly asks for them.
+Do not add generic sections such as `Usage Suggestions`, `How To Use`, or agent instructions inside generated page/material Markdown unless the user explicitly asks for them.
 
 ## Workflow
 
