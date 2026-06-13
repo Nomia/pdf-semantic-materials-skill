@@ -1,0 +1,3 @@
+display_name: PDF Semantic Materials
+short_description: Turn PDFs into page-by-page semantic material packs.
+default_prompt: Convert this PDF into an agent-readable semantic materials package.
